@@ -21,7 +21,7 @@ Ardent Prayers is a digital wall for people to post their prayer needs.
 
 ## Install
 ```bash
-$ cd ardent-forms
+$ cd ardent-prayers
 $ npm install
 ```
 
