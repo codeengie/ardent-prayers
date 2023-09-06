@@ -1,3 +1,5 @@
+import './PrayerWall.scss';
+
 const PrayerWall = () => {
 	return (
 		<div className="prayer-wall">
