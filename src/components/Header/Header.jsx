@@ -1,8 +1,11 @@
 import './Header.scss';
+import Brand from '../Brand/Brand.jsx';
 
 const Header = () => {
 	return (
-		<header className="header">Ardent Prayers</header>
+		<header className="header">
+			<Brand/>
+		</header>
 	)
 }
 

@@ -1,0 +1,34 @@
+.hero {
+	align-items: center;
+	background: #333 url(../../assets/images/hero.webp) 0 0 no-repeat;
+	display: flex;
+	height: 120px;
+	position: relative;
+
+	&__book,
+	&__text {
+		text-shadow: 1px 1px 2px var(--black);
+	}
+
+	&__book {
+		align-self: end;
+		font: {
+			size: 1rem;
+			style: normal;
+		}
+	}
+
+	&__verse {
+		color: var(--white);
+		display: flex;
+		flex-flow: column;
+		font-weight: var(--weight-semibold);
+		position: absolute;
+		right: 20px;
+		width: 165px;
+	}
+
+	&__text {
+		font-size: 1.4rem;
+	}
+}

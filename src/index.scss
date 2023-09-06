@@ -1,11 +1,21 @@
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.4;
-	font-weight: 400;
+	// Color scheme
+	--black: #000000;
+	--white: #ffffff;
 
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	// Typeface weights
+	--weight-regular: 400;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+
+	background-color: var(--white);
+	color: var(--black);
+	font: {
+		family: Arial, sans-serif;
+		size: 62.5%;
+		weight: var(--weight-regular);
+	}
+	line-height: 1.4;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -14,6 +24,7 @@
 	-webkit-text-size-adjust: 100%;
 }
 
+blockquote,
 body,
 button,
 h1,
