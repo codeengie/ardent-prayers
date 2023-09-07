@@ -1,0 +1,13 @@
+.button {
+	background-color: var(--amethyst);
+	border-radius: 4px;
+	color: var(--white);
+	font-weight: var(--weight-semibold);
+	height: 28px;
+	width: 100px;
+
+	&:disabled {
+		background-color: var(--mobster);
+		cursor: not-allowed;
+	}
+}
