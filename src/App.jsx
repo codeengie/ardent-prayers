@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer.jsx';
 import Header from './components/Header/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import PrayerWall from './components/modules/PrayerWall/PrayerWall.jsx';
+import CallToAction from './components/CallToAction/CallToAction.jsx';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 			<main role="main">
 				<PrayerWall/>
 			</main>
+			<CallToAction/>
 			<Footer/>
 		</>
 	)

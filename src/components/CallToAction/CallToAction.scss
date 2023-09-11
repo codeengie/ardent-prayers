@@ -1,0 +1,22 @@
+.cta {
+	&__button {
+		background-color: var(--purple-heart);
+		height: 48px;
+		width: 140px;
+
+		::before {
+			background: transparent url(../../assets/images/praying_hands.svg) no-repeat 0 0 / cover;
+			content: '';
+			display: block;
+			filter: invert(100%);
+			height: auto;
+			margin-right: 4px;
+			width: 15px;
+		}
+	}
+
+	.button__text {
+		display: flex;
+		justify-content: center;
+	}
+}
