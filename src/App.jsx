@@ -1,5 +1,4 @@
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
+import { ModalContextProvider } from './store/modal-context.jsx';
 import './App.scss'
 import Footer from './components/Footer/Footer.jsx';
 import Header from './components/Header/Header.jsx';
@@ -17,10 +16,12 @@ function App() {
 			<main role="main">
 				<PrayerWall/>
 			</main>
-			<CallToAction/>
-			<Footer/>
-			<PostPrayer/>
-			<Backdrop/>
+			<ModalContextProvider>
+				<CallToAction/>
+				<Footer/>
+				<PostPrayer/>
+				<Backdrop/>
+			</ModalContextProvider>
 		</>
 	)
 }

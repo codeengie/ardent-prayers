@@ -1,17 +1,16 @@
+import { useContext } from 'react';
+import ModalContext from '../../store/modal-context.jsx';
 import './CallToAction.scss';
 import Button from '../Button/Button.jsx';
 
 const CallToAction = () => {
-	const handleClick = (event) => {
-		event.preventDefault();
-		console.log('Open Prayer Request Form');
-	}
+	const ctx = useContext(ModalContext);
 
 	return (
 		<div className="cta">
 			<Button
 				cName="cta__button"
-				onClick={handleClick}
+				onClick={ctx.onModalClick}
 				text="New Prayer"/>
 		</div>
 	)
