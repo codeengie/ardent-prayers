@@ -1,8 +1,9 @@
 .post-prayer {
 	background-color: var(--white);
+	display: none;
 	//height: 334px;
 	left: 50%;
-	//position: fixed;
+	position: fixed;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1020;
@@ -67,6 +68,6 @@
 	}
 
 	&--show {
-		position: fixed;
+		display: block;
 	}
 }

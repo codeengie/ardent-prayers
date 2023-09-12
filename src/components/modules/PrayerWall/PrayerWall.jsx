@@ -14,14 +14,14 @@ const PrayerWall = () => {
 		},
 		{
 			id: '817f6cc5-a58d-426c-8b08-04d8996f41ce',
-			name: 'Anonymouse',
+			name: 'Anonymous',
 			title: 'Healing',
 			message: 'Hendrerit dolor magna eget est lorem ipsum dolor sit amet. Et odio pellentesque diam volutpat commodo sed egestas egestas fringilla. In fermentum posuere urna nec tincidunt praesent.',
 			count: 1
 		},
 		{
 			id: '4125520d-3e84-473f-837d-fc897a70129d',
-			name: 'Anonymouse',
+			name: 'Anonymous',
 			title: 'Anxiety',
 			message: 'Augue mauris augue neque gravida in. Id velit ut tortor pretium viverra suspendisse potenti nullam ac.',
 			count: 0
