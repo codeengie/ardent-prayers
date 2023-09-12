@@ -1,8 +1,16 @@
+$button-width: 140px;
+
 .cta {
+	bottom: 40px;
+	position: fixed;
+	right: 20px;
+	width: $button-width;
+	z-index: 1000;
+
 	&__button {
 		background-color: var(--purple-heart);
 		height: 48px;
-		width: 140px;
+		width: $button-width;
 
 		::before {
 			background: transparent url(../../assets/images/praying_hands.svg) no-repeat 0 0 / cover;

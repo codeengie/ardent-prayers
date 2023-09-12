@@ -6,6 +6,7 @@ import Header from './components/Header/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import PrayerWall from './components/modules/PrayerWall/PrayerWall.jsx';
 import CallToAction from './components/CallToAction/CallToAction.jsx';
+import Backdrop from './components/Backdrop/Backdrop.jsx';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 			</main>
 			<CallToAction/>
 			<Footer/>
+			<Backdrop/>
 		</>
 	)
 }
