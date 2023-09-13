@@ -1,0 +1,35 @@
+.form-input {
+	background-color: var(--gallery);
+	padding: 2px 11px 6px;
+
+	&:first-of-type {
+		margin-top: 24px;
+	}
+
+	&:not(:first-of-type) {
+		margin-top: 8px;
+	}
+
+	&__error {
+		color: red;
+		font-size: 1.2rem;
+	}
+
+	&__field {
+		background-color: transparent;
+		// @todo Add family property
+		font: {
+			size: 1.4rem;
+			weight: var(--weight-regular);
+		}
+		min-width: 340px;
+	}
+
+	&__label {
+		color: var(--dove-gray);
+		font: {
+			size: 1.2rem;
+			weight: var(--weight-semibold); // @todo This weight should be set to 'medium' Montserrat
+		}
+	}
+}
