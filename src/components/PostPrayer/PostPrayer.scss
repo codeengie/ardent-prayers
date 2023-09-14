@@ -22,47 +22,12 @@
 	&__form {
 		padding: 24px 16px 30px;
 
-		&-textarea {
-			background-color: transparent;
-			// @todo Add family property
-			font: {
-				size: 1.4rem;
-				weight: var(--weight-regular);
-			}
-			min-width: 340px;
-		}
-
-		&-label {
-			color: var(--dove-gray);
-			font: {
-				size: 1.2rem;
-				weight: var(--weight-semibold); // @todo This weight should be 'medium' Montserrat
-			}
-		}
-
-		&-textarea {
-			height: 90px;
-		}
-
 		&-title {
 			font: {
 				size: 1.6rem;
 				weight: var(--weight-semibold); // @todo This weight should be 'medium' Montserrant
 			}
 			text-align: center;
-		}
-
-		&-wrap {
-			background-color: var(--gallery);
-			padding: 2px 11px 6px;
-
-			&:first-of-type {
-				margin-top: 24px;
-			}
-
-			&:not(:first-of-type) {
-				margin-top: 8px;
-			}
 		}
 	}
 

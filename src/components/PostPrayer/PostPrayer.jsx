@@ -3,6 +3,7 @@ import ModalContext from '../../store/modal-context.jsx';
 import './PostPrayer.scss';
 import Button from '../Button/Button.jsx';
 import FormInput from '../FormInput/FormInput.jsx';
+import FormTextArea from '../FormTextArea/FormTextArea.jsx';
 
 const PostPrayer = () => {
 	const ctxPostPrayer = useContext(ModalContext);
@@ -18,10 +19,7 @@ const PostPrayer = () => {
 				<h2 className="post-prayer__form-title">Post A New Prayer</h2>
 				<FormInput id="name" label="Name" type="text"/>
 				<FormInput id="title" label="Title" type="text"/>
-				<div className="post-prayer__form-wrap">
-					<label className="post-prayer__form-label" htmlFor="message">Message</label>
-					<textarea className="post-prayer__form-textarea" id="message" maxLength="300"></textarea>
-				</div>
+				<FormTextArea id="message" label="Message" maxCount="300"/>
 			</form>
 			<Button cName="post-prayer__button" onClick={handleSubmit} text="Post Prayer"/>
 		</div>
