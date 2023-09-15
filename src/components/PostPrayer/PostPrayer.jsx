@@ -10,8 +10,8 @@ const PostPrayer = () => {
 	const toggleClass = ctxPostPrayer.isModalOpen ? 'post-prayer post-prayer--show' : 'post-prayer';
 
 	// Set the initial state of the inputs
-	const [inputValue, setInputValue] = useState({ name: '', title: '' });
-	const { name, title } = inputValue;
+	const [inputValue, setInputValue] = useState({ name: '', title: '', message: '' });
+	const { name, title, message } = inputValue;
 
 	// This single method handles setting the input value for all fields
 	const handleChange = event => {
@@ -23,7 +23,7 @@ const PostPrayer = () => {
 	}
 
 	const handleSubmit = () => {
-		console.log('Form submitted', name, title);
+		console.log('Form submitted', name, title, message);
 	}
 
 	return (
@@ -42,8 +42,15 @@ const PostPrayer = () => {
 					label="Title"
 					onChange={handleChange}
 					value={title}
-					type="text"/>
-				<FormTextArea id="message" label="Message" maxCount="300"/>
+					type="text"
+				/>
+				<FormTextArea
+					id="message"
+					label="Message"
+					maxCount="300"
+					onChange={handleChange}
+					value={message}
+				/>
 			</form>
 			<Button cName="post-prayer__button" onClick={handleSubmit} text="Post Prayer"/>
 		</div>

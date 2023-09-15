@@ -2,21 +2,13 @@ import { useState } from 'react';
 import './FormTextArea.scss';
 
 const FormTextArea = (props) => {
-	const [boxValue, setBoxValue] = useState('');
+	const boxValue = props.value;
 	const [boxTouched, setBoxTouched] = useState(false);
 	const boxIsValid = boxValue.trim() !== '';
 	const boxIsInvalid = !boxIsValid && boxTouched;
-	const [boxCounter, setBoxCounter] = useState(0);
 
 	const handleBlur = () => {
 		setBoxTouched(true);
-	}
-
-	const handleChange = event => {
-		let boxValue = event.target.value;
-
-		setBoxValue(boxValue);
-		setBoxCounter(boxValue.length);
 	}
 
 	const handleFocus = () => {
@@ -31,12 +23,13 @@ const FormTextArea = (props) => {
 					className="form-textarea__box"
 					id={props.id}
 					maxLength={props.maxCount}
+					name={props.id}
 					onBlur={handleBlur}
-					onChange={handleChange}
+					onChange={props.onChange}
 					onFocus={handleFocus}
 					value={boxValue}>
 				</textarea>
-				<div className="form-textarea__counter">{`${boxCounter}/${props.maxCount}`}</div>
+				<div className="form-textarea__counter">{`${boxValue.length}/${props.maxCount}`}</div>
 			</div>
 			{boxIsInvalid && <p className="form-textarea__error">Please enter a message</p>}
 		</>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './FormInput.scss';
 
 const FormInput = (props) => {
+	// Notice I'm using `useState` at a minimum and deriving other variables based on the state to keep things simple
 	const inputValue = props.value;
 	const [inputTouched, setInputTouched] = useState(false);
 	const inputIsValid = inputValue.trim() !== '';
