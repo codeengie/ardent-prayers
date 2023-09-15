@@ -2,17 +2,13 @@ import { useState } from 'react';
 import './FormInput.scss';
 
 const FormInput = (props) => {
-	const [inputValue, setInputValue] = useState('');
+	const inputValue = props.value;
 	const [inputTouched, setInputTouched] = useState(false);
 	const inputIsValid = inputValue.trim() !== '';
 	const inputIsInvalid = !inputIsValid && inputTouched;
 
 	const handleBlur = () => {
 		setInputTouched(true);
-	}
-
-	const handleChange = event => {
-		setInputValue(event.target.value);
 	}
 
 	const handleFocus = () => {
@@ -26,8 +22,9 @@ const FormInput = (props) => {
 				<input
 					className="form-input__field"
 					id={props.id}
+					name={props.id}
 					onBlur={handleBlur}
-					onChange={handleChange}
+					onChange={props.onChange}
 					onFocus={handleFocus}
 					type={props.type}
 					value={inputValue}
