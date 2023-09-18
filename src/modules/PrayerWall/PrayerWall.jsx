@@ -1,5 +1,5 @@
 import './PrayerWall.scss';
-import Card from '../../Card/Card.jsx';
+import Card from '../../components/Card/Card.jsx';
 
 const PrayerWall = () => {
 	let content = null;
