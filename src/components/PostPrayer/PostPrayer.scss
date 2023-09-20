@@ -17,6 +17,10 @@
 		}
 		height: 48px;
 		width: 100%;
+
+		&:disabled {
+			background-color: #aaa;
+		}
 	}
 
 	&__form {
