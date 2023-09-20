@@ -37,7 +37,7 @@ const PrayerWall = () => {
 
 // Output prayer requests
 	if (prayers.length > 0) {
-		content = prayers.map(prayer => <Card key={prayer.id} data={prayer}/>);
+		content = prayers.map(prayer => <Card key={prayer.id} id={prayer.id} data={prayer}/>);
 	}
 
 	return (
