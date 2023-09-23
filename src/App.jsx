@@ -7,14 +7,17 @@ import PrayerWall from './modules/PrayerWall/PrayerWall.jsx';
 import CallToAction from './components/CallToAction/CallToAction.jsx';
 import Backdrop from './components/Backdrop/Backdrop.jsx';
 import PostPrayer from './components/PostPrayer/PostPrayer.jsx';
+import { PrayersContextProvider } from './store/prayers-context.jsx';
 
-function App() {
+const App = () => {
 	return (
 		<>
 			<Header/>
 			<Hero/>
 			<main role="main">
-				<PrayerWall/>
+				<PrayersContextProvider>
+					<PrayerWall/>
+				</PrayersContextProvider>
 			</main>
 			<ModalContextProvider>
 				<CallToAction/>
