@@ -34,16 +34,29 @@ export const PrayersContextProvider = (props) => {
 			setPrayers(JSON.parse(data.body));
 		} catch (error) {
 			setError(error.message);
-			console.log('Error:', error.message)
+			console.log('Error:', error.message);
 		}
 		setIsLoading(false);
 	}, []);
+
+	const updatePrayerCount = (id) => {
+		/**
+		 * Initially I was trying to update the prayer count by finding the prayer's index in the array but
+		 * when I invoked setState it would not update or render. I was trying to avoid copying the entire
+		 * array in general for performance reasons but there are other ways of mitigating the hit by
+		 * limiting results or only rendering prayers in the user's viewport. For now this will do!
+		 */
+		const updatedPrayer = prayers.map(
+			prayer => prayer.PrayerId === id ? {...prayer, Count: prayer.Count + 1 } : prayer);
+
+		setPrayers(updatedPrayer);
+	}
 
 	useEffect(() => {
 		fetchPrayers();
 	}, [fetchPrayers]);
 
-	return <PrayersContext.Provider value={{error: error, isLoading: isLoading, prayers: prayers}}>{props.children}</PrayersContext.Provider>
+	return <PrayersContext.Provider value={{error: error, isLoading: isLoading, prayers: prayers, updatePrayerCount}}>{props.children}</PrayersContext.Provider>
 }
 
 export default PrayersContext;

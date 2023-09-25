@@ -19,7 +19,7 @@ const PrayerWall = () => {
 
 	// Display loader while fetch data
 	if (ctx.isLoading) {
-		content = <p>Foobar</p>
+		content = <p>Loading...</p>
 	}
 
 	return (
