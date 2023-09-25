@@ -15,7 +15,7 @@ const tableName = 'ArdentPrayers_Dev';
 export const handler = async (event, context) => {
 	const command = new ScanCommand({
 		TableName: tableName,
-		ScanIndexForward: false
+		ScanIndexForward: false // This only works with query
 	});
 	const headers = { 'Content-Type': 'application/json' };
 	let body;
