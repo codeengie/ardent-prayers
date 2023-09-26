@@ -9,7 +9,12 @@ const PrayerWall = () => {
 
 	// Output prayer requests
 	if (ctx.prayers.length > 0) {
-		content = ctx.prayers.map(prayer => <Card key={prayer.PrayerId} id={prayer.PrayerId} data={prayer}/>);
+		content = ctx.prayers.map(prayer =>
+			<Card
+				key={prayer.PrayerId}
+				data={prayer}
+			/>
+		);
 	}
 
 	// Display error if unable to fetch requests
