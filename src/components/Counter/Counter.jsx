@@ -1,5 +1,4 @@
 import './Counter.scss';
-// import prayingHands from '../../assets/images/praying_hands.svg'
 
 const Counter = (props) => {
 

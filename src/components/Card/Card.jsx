@@ -10,12 +10,12 @@ const Card = (props) => {
 	const ctx = useContext(PrayersContext);
 	const countRef = useRef(null);
 
-	const setPrayer = () => {
+	const setPrayer = async () => {
 		// Get the current prayer counter element
 		const domElement = countRef.current;
 		const extractedCount = parseInt(domElement.innerText.match(/\d+/g));
 
-		ctx.updatePrayerCount(props.data.PrayerId, props.data.CreatedDate, extractedCount);
+		await ctx.updatePrayerCount(props.data.PrayerId, props.data.CreatedDate, extractedCount);
 
 		// Set localStorage for current prayer card
 		localStorage.setItem(`prayed_${props.data.PrayerId}`, 'true');
