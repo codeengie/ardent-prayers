@@ -14,17 +14,17 @@ const App = () => {
 		<>
 			<Header/>
 			<Hero/>
-			<main role="main">
-				<PrayersContextProvider>
+			<PrayersContextProvider>
+				<main role="main">
 					<PrayerWall/>
-				</PrayersContextProvider>
-			</main>
-			<ModalContextProvider>
-				<CallToAction/>
-				<Footer/>
-				<PostPrayer/>
-				<Backdrop/>
-			</ModalContextProvider>
+				</main>
+				<ModalContextProvider>
+					<CallToAction/>
+					<Footer/>
+					<PostPrayer/>
+					<Backdrop/>
+				</ModalContextProvider>
+			</PrayersContextProvider>
 		</>
 	)
 }

@@ -39,7 +39,7 @@ export const PrayersContextProvider = (props) => {
 			}
 
 			if (!id) {
-				return await response.json();
+				return response.json();
 			}
 
 		} catch (error) {
@@ -79,12 +79,37 @@ export const PrayersContextProvider = (props) => {
 		setPrayers(updatedPrayer);
 	};
 
+	// Post new prayer request
+	const postNewPrayer = async (data) => {
+		const settings = {
+			method: 'POST',
+			body: JSON.stringify(data)
+		}
+
+		try {
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/prayers`, settings);
+
+			if (!response.ok) {
+				new Error(`Prayer request was not posted: ${response.status}`);
+			}
+
+			// Await operator is required otherwise you'll be getting a Promise object which you cant process
+			const postData = await response.json();
+			console.log(JSON.parse(postData.body));
+
+			// Add the new prayer to the store and send the 'ok' signal to the form
+
+		} catch (error) {
+			console.log(`Error: ${error.message}`);
+		}
+	}
+
 	useEffect(() => {
 		fetchPrayers();
 		console.log('Fetch Prayers');
 	}, [fetchPrayers]);
 
-	return <PrayersContext.Provider value={{error: error, isLoading: isLoading, prayers: prayers, updatePrayerCount}}>{props.children}</PrayersContext.Provider>
+	return <PrayersContext.Provider value={{error: error, isLoading: isLoading, prayers: prayers, updatePrayerCount, postNewPrayer}}>{props.children}</PrayersContext.Provider>
 }
 
 export default PrayersContext;

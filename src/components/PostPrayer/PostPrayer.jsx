@@ -5,13 +5,15 @@ import Button from '../Button/Button.jsx';
 import FormInput from '../FormInput/FormInput.jsx';
 import useInput from '../../hooks/use-input.jsx';
 import FormTextArea from '../FormTextArea/FormTextArea.jsx';
+import PrayersContext from '../../store/prayers-context.jsx';
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
 const isInputEmpty = value => value.trim() !== '';
 
 const PostPrayer = () => {
-	const ctxPostPrayer = useContext(ModalContext);
-	const toggleClass = ctxPostPrayer.isModalOpen ? 'post-prayer post-prayer--show' : 'post-prayer';
+	const ctxModal = useContext(ModalContext);
+	const ctxPrayers = useContext(PrayersContext);
+	const toggleClass = ctxModal.isModalOpen ? 'post-prayer post-prayer--show' : 'post-prayer';
 	let formIsValid = false;
 
 	// Name input
@@ -57,7 +59,15 @@ const PostPrayer = () => {
 			return;
 		}
 
-		console.log(`Form data: ${nameValue}, ${titleValue}, ${messageValue}`);
+		// Create form data object
+		const formData = {
+			formName: nameValue,
+			formTitle: titleValue,
+			formMessage: messageValue
+		}
+
+		// Invoke API and post prayer
+		await ctxPrayers.postNewPrayer(formData);
 
 		// Reset form fields
 		nameReset();
