@@ -13,7 +13,11 @@ const Card = (props) => {
 	const setPrayer = async () => {
 		// Get the current prayer counter element
 		const domElement = countRef.current;
-		const extractedCount = parseInt(domElement.innerText.match(/\d+/g));
+		let extractedCount = parseInt(domElement.innerText.match(/\d+/g));
+
+		if (isNaN(extractedCount)) {
+			extractedCount = 0;
+		}
 
 		await ctx.updatePrayerCount(props.data.PrayerId, props.data.CreatedDate, extractedCount);
 
