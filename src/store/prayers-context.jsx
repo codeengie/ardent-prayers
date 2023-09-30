@@ -70,6 +70,7 @@ export const PrayersContextProvider = (props) => {
 		 * when I invoked setState it would not update or render. I was trying to avoid copying the entire
 		 * array in general for performance reasons but there are other ways of mitigating the hit by
 		 * limiting results or only rendering prayers in the user's viewport. For now this will do!
+		 * @todo Emulate what you did in postNewPrayer by using `prev` hook
 		 */
 		const updatedPrayer = prayers.map(
 			prayer => prayer.PrayerId === id ? {...prayer, PrayerCount: newCount } : prayer);
@@ -95,9 +96,12 @@ export const PrayersContextProvider = (props) => {
 
 			// Await operator is required otherwise you'll be getting a Promise object which you cant process
 			const postData = await response.json();
-			console.log(JSON.parse(postData.body));
 
-			// Add the new prayer to the store and send the 'ok' signal to the form
+			// Add the new prayer to the store
+			setPrayers(prevPrayers => [...prevPrayers, JSON.parse(postData.body)]);
+
+			// Return the statusCode
+			return postData.statusCode;
 
 		} catch (error) {
 			console.log(`Error: ${error.message}`);

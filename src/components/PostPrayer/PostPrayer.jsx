@@ -67,12 +67,20 @@ const PostPrayer = () => {
 		}
 
 		// Invoke API and post prayer
-		await ctxPrayers.postNewPrayer(formData);
+		const response = await ctxPrayers.postNewPrayer(formData);
+
+		// If there was an error posting the prayer, let the user know to try again
+		if (response !== '200') {
+			return;
+		}
 
 		// Reset form fields
 		nameReset();
 		titleReset();
 		messageReset();
+
+		// Close the form
+		ctxModal.onModalClick();
 	}
 
 	return (
