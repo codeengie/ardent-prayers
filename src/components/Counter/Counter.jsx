@@ -1,7 +1,6 @@
 import './Counter.scss';
 
 const Counter = (props) => {
-
 	return (
 		<div className={`${props.cName} counter`} ref={props.forwardedRef}>
 			<span className="counter__icon"></span>
