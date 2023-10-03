@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import ModalContext from '../../store/modal-context.jsx';
 import './PostPrayer.scss';
 import Button from '../Button/Button.jsx';
@@ -47,6 +47,20 @@ const PostPrayer = () => {
 		reset: messageReset
 	} = useInput(isInputEmpty);
 
+	// Reset form. I added useCallback() to prevent re-render error
+	const resetForm = useCallback(() => {
+		nameReset();
+		titleReset();
+		messageReset();
+	}, [nameReset, titleReset, messageReset]);
+
+	// Implemented useEffect() to fix infinite re-render errors
+	useEffect(() => {
+		if (!ctxModal.isModalOpen) {
+			resetForm();
+		}
+	}, [ctxModal.isModalOpen, resetForm]);
+
 	// Check if form is valid
 	if (nameValue && titleValue && messageValue) {
 		formIsValid = true;
@@ -76,9 +90,7 @@ const PostPrayer = () => {
 		}
 
 		// Reset form fields
-		nameReset();
-		titleReset();
-		messageReset();
+		resetForm();
 
 		// Close the form
 		ctxModal.onModalClick();
