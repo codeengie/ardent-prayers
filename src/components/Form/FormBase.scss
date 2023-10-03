@@ -1,0 +1,59 @@
+.form {
+	$self: &;
+
+	&__field {
+		&:first-of-type {
+			margin-top: 24px;
+		}
+
+		&:not(:first-of-type) {
+			margin-top: 8px;
+		}
+
+		&--error {
+			#{$self} {
+				&__message {
+					display: block;
+				}
+
+				&__wrap {
+					background-color: var(--mandys-pink);
+					outline: 1px solid var(--monza);
+				}
+			}
+		}
+	}
+
+	&__input,
+	&__textarea {
+		background-color: transparent;
+		font: {
+			family: 'Montserrat', sans-serif;
+			size: 1.4rem;
+			weight: var(--weight-regular);
+		}
+	}
+
+	&__label,
+	&__message {
+		font: {
+			size: 1.2rem;
+			weight: var(--weight-semibold);
+		}
+	}
+
+	&__label {
+		color: var(--dove-gray);
+	}
+
+	&__message {
+		color: var(--monza);
+		display: none;
+		padding: 2px 2px 2px 0;
+	}
+
+	&__wrap {
+		background-color: var(--gallery);
+		padding: 2px 11px 6px;
+	}
+}

@@ -6,6 +6,7 @@
 	--dove-gray: #707070;
 	--gallery: #ececec;
 	--mobster: #7e7684;
+	--mandys-pink: #f7c3c1;
 	--monza: #de120a;
 	--purple-heart: #9c29b2;
 	--white: #ffffff;
@@ -16,10 +17,13 @@
 	--weight-semibold: 600;
 	--weight-bold: 700;
 
+	// Form
+	--form-input-width: 200px; // 412px = 340px;
+
 	background-color: var(--white);
 	color: var(--black);
 	font: {
-		family: Arial, sans-serif;
+		family: 'Montserrat', Arial, sans-serif;
 		size: 62.5%;
 		weight: var(--weight-regular);
 	}

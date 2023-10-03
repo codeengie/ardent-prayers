@@ -2,10 +2,11 @@ import { useContext } from 'react';
 import ModalContext from '../../store/modal-context.jsx';
 import './PostPrayer.scss';
 import Button from '../Button/Button.jsx';
-import FormInput from '../FormInput/FormInput.jsx';
+import FormInput from '../Form/FormInput/FormInput.jsx';
 import useInput from '../../hooks/use-input.jsx';
-import FormTextArea from '../FormTextArea/FormTextArea.jsx';
+import FormTextArea from '../Form/FormTextArea/FormTextArea.jsx';
 import PrayersContext from '../../store/prayers-context.jsx';
+import '../Form/FormBase.scss';
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
 const isInputEmpty = value => value.trim() !== '';
