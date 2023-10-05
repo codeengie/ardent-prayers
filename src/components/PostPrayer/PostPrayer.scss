@@ -1,11 +1,15 @@
 .post-prayer {
+	$self: &;
+
 	background-color: var(--white);
 	display: none;
 	//height: 334px;
 	left: 50%;
 	position: fixed;
+	height: 402px;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	transition: all .2s ease-out;
 	z-index: 1020;
 
 	&__button {
@@ -23,6 +27,19 @@
 		}
 	}
 
+	&__close {
+		background: transparent url(../../assets/images/icon_close.svg) no-repeat center center / 20px;
+		height: 20px;
+		position: absolute;
+		right: 10px;
+		top: 4px;
+		width: 20px;
+
+		&:not([disabled]):hover {
+			background-color: transparent;
+		}
+	}
+
 	&__form {
 		padding: 24px 16px 30px;
 
@@ -32,6 +49,29 @@
 				weight: var(--weight-semibold); // @todo This weight should be 'medium' Montserrant
 			}
 			text-align: center;
+		}
+	}
+
+	&__message {
+		display: none;
+		padding: 24px 16px 30px;
+	}
+
+	&--post {
+		height: 200px;
+		overflow: hidden;
+		transition: all .3s ease-in;
+
+		#{$self} {
+			&__message {
+				display: block;
+			}
+
+			&__wrap {
+				height: 0;
+				opacity: 0;
+				transition: all .3s ease;
+			}
 		}
 	}
 

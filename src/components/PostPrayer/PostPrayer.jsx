@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import ModalContext from '../../store/modal-context.jsx';
 import './PostPrayer.scss';
 import Button from '../Button/Button.jsx';
@@ -16,6 +16,8 @@ const PostPrayer = () => {
 	const ctxPrayers = useContext(PrayersContext);
 	const toggleClass = ctxModal.isModalOpen ? 'post-prayer post-prayer--show' : 'post-prayer';
 	let formIsValid = false;
+	const [message, setMessage] = useState('Posting prayer...');
+	const [postClass, setPostClass] = useState('');
 
 	// Name input
 	const {
@@ -74,6 +76,8 @@ const PostPrayer = () => {
 			return;
 		}
 
+		setPostClass('post-prayer--post');
+
 		// Create form data object
 		const formData = {
 			formName: nameValue,
@@ -84,54 +88,69 @@ const PostPrayer = () => {
 		// Invoke API and post prayer
 		const response = await ctxPrayers.postNewPrayer(formData);
 
-		// If there was an error posting the prayer, let the user know to try again
+		// If there is an error posting the prayer, let the user know
 		if (response !== '200') {
+			setMessage('Something happened on our end. Please try again!');
 			return;
 		}
 
+		setMessage('Prayer posted.');
+
+		setTimeout(() => {
+			resetForm();
+			ctxModal.onModalClick();
+			setPostClass('');
+		}, 4000);
+
 		// Reset form fields
-		resetForm();
+		//resetForm();
 
 		// Close the form
-		ctxModal.onModalClick();
+		//ctxModal.onModalClick();
 	}
 
 	return (
-		<div className={toggleClass}>
-			<form className="post-prayer__form">
-				<h2 className="post-prayer__form-title">Post A New Prayer</h2>
-				<FormInput
-					id="name"
-					hasError={nameIsInvalid}
-					label="Name"
-					onBlur={nameHandleBlur}
-					onChange={nameHandleChange}
-					onFocus={nameHandleFocus}
-					value={nameValue}
-					type="text"
-				/>
-				<FormInput
-					id="title"
-					hasError={titleIsInvalid}
-					label="Title"
-					onBlur={titleHandleBlur}
-					onChange={titleHandleChange}
-					onFocus={titleHandleFocus}
-					value={titleValue}
-					type="text"
-				/>
-				<FormTextArea
-					id="message"
-					hasError={messageIsInvalid}
-					label="Message"
-					maxCount="300"
-					onBlur={messageHandleBlur}
-					onChange={messageHandleChange}
-					onFocus={messageHandleFocus}
-					value={messageValue}
-				/>
-			</form>
-			<Button cName="post-prayer__button" disableButton={!formIsValid} onClick={handleSubmit} text="Post Prayer"/>
+		<div className={`${toggleClass} ${postClass}`}>
+			<div className="post-prayer__wrap">
+				<Button cName="post-prayer__close" onClick={ctxModal.onModalClick}/>
+				<form className="post-prayer__form">
+					<h2 className="post-prayer__form-title">Post A New Prayer</h2>
+					<FormInput
+						id="name"
+						hasError={nameIsInvalid}
+						label="Name"
+						onBlur={nameHandleBlur}
+						onChange={nameHandleChange}
+						onFocus={nameHandleFocus}
+						value={nameValue}
+						type="text"
+					/>
+					<FormInput
+						id="title"
+						hasError={titleIsInvalid}
+						label="Title"
+						onBlur={titleHandleBlur}
+						onChange={titleHandleChange}
+						onFocus={titleHandleFocus}
+						value={titleValue}
+						type="text"
+					/>
+					<FormTextArea
+						id="message"
+						hasError={messageIsInvalid}
+						label="Message"
+						maxCount="300"
+						onBlur={messageHandleBlur}
+						onChange={messageHandleChange}
+						onFocus={messageHandleFocus}
+						value={messageValue}
+					/>
+				</form>
+				<Button cName="post-prayer__button" disableButton={!formIsValid} onClick={handleSubmit} text="Post Prayer"/>
+			</div>
+			<div className="post-prayer__message">
+				<p>{message}</p>
+			</div>
 		</div>
 	)
 }
