@@ -2,6 +2,7 @@ import './FormTextArea.scss';
 
 const FormTextArea = (props) => {
 	const hasError = props.hasError ? 'form__field form__field--error' : 'form__field';
+	const counter = `${props.value.length} / ${props.maxCount}`;
 
 	return (
 		<div className={hasError}>
@@ -17,7 +18,7 @@ const FormTextArea = (props) => {
 					onFocus={props.onFocus}
 					value={props.value}>
 				</textarea>
-				<div className="form__counter">{`${props.value.length}/${props.maxCount}`}</div>
+				<div className="form__counter">{counter}</div>
 			</div>
 			<p className="form__message">Please enter a {props.id}</p>
 		</div>
