@@ -1,16 +1,28 @@
 .post-prayer {
 	$self: &;
 
-	background-color: var(--white);
 	display: none;
-	//height: 334px;
 	left: 50%;
 	position: fixed;
-	height: 402px;
+	overflow: hidden;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	transition: all .2s ease-out;
+	transition: all .2s ease;
 	z-index: 1020;
+
+	&__bottom {
+		height: 48px;
+		overflow: hidden;
+		position: relative;
+		transition: all .2s ease;
+	}
+
+	&__button,
+	&__loader.loader-line {
+		left: 0;
+		position: absolute;
+		top: 0;
+	}
 
 	&__button {
 		background-color: var(--purple-heart);
@@ -20,6 +32,7 @@
 			weight: var(--weight-semibold);
 		}
 		height: 48px;
+		overflow: hidden;
 		width: 100%;
 
 		&:disabled {
@@ -31,7 +44,7 @@
 		background: transparent url(../../assets/images/icon_close.svg) no-repeat center center / 20px;
 		height: 20px;
 		position: absolute;
-		right: 10px;
+		right: 12px;
 		top: 4px;
 		width: 20px;
 
@@ -42,35 +55,76 @@
 
 	&__form {
 		padding: 24px 16px 30px;
-
-		&-title {
-			font: {
-				size: 1.6rem;
-				weight: var(--weight-semibold); // @todo This weight should be 'medium' Montserrant
-			}
-			text-align: center;
-		}
 	}
 
-	&__message {
+	&__loader.loader-line {
+		height: 0;
+	}
+
+	&__status {
 		display: none;
-		padding: 24px 16px 30px;
+		font-weight: var(--weight-semibold);
+		text-align: center;
 	}
 
-	&--post {
-		height: 200px;
-		overflow: hidden;
+	&__title {
+		font: {
+			size: 1.6rem;
+			weight: var(--weight-semibold);
+		}
+		text-align: center;
+	}
+
+	&__top {
+		background-color: var(--white);
+	}
+
+	&--posted,
+	&--posting {
 		transition: all .3s ease-in;
 
 		#{$self} {
-			&__message {
+			&__bottom {
+				height: 6px;
+			}
+
+			&__button,
+			&__loader.loader-line {
+				transition: all .3s ease;
+			}
+
+			&__button {
+				height: 0;
+			}
+
+			&__close,
+			&__form {
+				display: none;
+			}
+
+			&__loader.loader-line {
+				height: 6px;
+			}
+
+			&__status {
 				display: block;
 			}
 
-			&__wrap {
+			&__top {
+				align-items: center;
+				display: flex;
+				height: 60px;
+				justify-content: center;
+				width: 160px;
+			}
+		}
+	}
+
+	// Note the placement order to override the height above @todo Break styles so this is unnecessary
+	&--posted {
+		#{$self} {
+			&__loader.loader-line {
 				height: 0;
-				opacity: 0;
-				transition: all .3s ease;
 			}
 		}
 	}

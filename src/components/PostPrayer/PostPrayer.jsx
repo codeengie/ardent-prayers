@@ -7,6 +7,7 @@ import useInput from '../../hooks/use-input.jsx';
 import FormTextArea from '../Form/FormTextArea/FormTextArea.jsx';
 import PrayersContext from '../../store/prayers-context.jsx';
 import '../Form/FormBase.scss';
+import LoaderLine from "../LoaderLine/LoaderLine.jsx";
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
 const isInputEmpty = value => value.trim() !== '';
@@ -16,7 +17,7 @@ const PostPrayer = () => {
 	const ctxPrayers = useContext(PrayersContext);
 	const toggleClass = ctxModal.isModalOpen ? 'post-prayer post-prayer--show' : 'post-prayer';
 	let formIsValid = false;
-	const [message, setMessage] = useState('Posting prayer...');
+	const [status, setStatus] = useState('Posting prayer...');
 	const [postClass, setPostClass] = useState('');
 
 	// Name input
@@ -76,7 +77,7 @@ const PostPrayer = () => {
 			return;
 		}
 
-		setPostClass('post-prayer--post');
+		setPostClass('post-prayer--posting');
 
 		// Create form data object
 		const formData = {
@@ -90,31 +91,28 @@ const PostPrayer = () => {
 
 		// If there is an error posting the prayer, let the user know
 		if (response !== '200') {
-			setMessage('Something happened on our end. Please try again!');
+			setStatus('Something happened on our end. Please try again!');
 			return;
 		}
 
-		setMessage('Prayer posted.');
+		setStatus('Prayer posted.');
+		setPostClass('post-prayer--posted');
 
 		setTimeout(() => {
 			resetForm();
 			ctxModal.onModalClick();
 			setPostClass('');
-		}, 4000);
-
-		// Reset form fields
-		//resetForm();
-
-		// Close the form
-		//ctxModal.onModalClick();
+			setStatus('Posting prayer...');
+		}, 3000);
 	}
 
 	return (
 		<div className={`${toggleClass} ${postClass}`}>
-			<div className="post-prayer__wrap">
-				<Button cName="post-prayer__close" onClick={ctxModal.onModalClick}/>
+			<Button cName="post-prayer__close" onClick={ctxModal.onModalClick}/>
+			<div className="post-prayer__top">
+				<div className="post-prayer__status">{status}</div>
 				<form className="post-prayer__form">
-					<h2 className="post-prayer__form-title">Post A New Prayer</h2>
+					<h2 className="post-prayer__title">Post A New Prayer</h2>
 					<FormInput
 						id="name"
 						hasError={nameIsInvalid}
@@ -146,10 +144,10 @@ const PostPrayer = () => {
 						value={messageValue}
 					/>
 				</form>
-				<Button cName="post-prayer__button" disableButton={!formIsValid} onClick={handleSubmit} text="Post Prayer"/>
 			</div>
-			<div className="post-prayer__message">
-				<p>{message}</p>
+			<div className="post-prayer__bottom">
+				<Button cName="post-prayer__button" disableButton={!formIsValid} onClick={handleSubmit} text="Post Prayer"/>
+				<LoaderLine className="post-prayer__loader"/>
 			</div>
 		</div>
 	)
