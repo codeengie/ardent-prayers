@@ -1,8 +1,9 @@
 .hero {
 	align-items: center;
-	background: #333 url(../../assets/images/hero.webp) 0 0 no-repeat;
+	background: var(--dove-gray) url(../../assets/images/hero-576w.webp) 0 0 no-repeat;
+	background-size: cover;
 	display: flex;
-	height: 120px;
+	height: 200px;
 	position: relative;
 
 	&__book,
@@ -12,10 +13,7 @@
 
 	&__book {
 		align-self: end;
-		font: {
-			size: 1rem;
-			style: normal;
-		}
+		font-size: 1rem;
 	}
 
 	&__verse {
@@ -23,12 +21,70 @@
 		display: flex;
 		flex-flow: column;
 		font-weight: var(--weight-semibold);
-		position: absolute;
-		right: 20px;
-		width: 165px;
 	}
 
 	&__text {
 		font-size: 1.4rem;
+	}
+
+	@media (width <= 575px) {
+		justify-content: center;
+
+		&__verse {
+			width: 266px;
+		}
+	}
+
+	@media (width >= 576px) {
+		background-image: url(../../assets/images/hero-768w.webp);
+		height: 280px;
+
+		&__book {
+			font-size: 1.4rem;
+		}
+
+		&__text {
+			font-size: 1.8rem;
+		}
+
+		&__verse {
+			position: absolute;
+			right: 20px;
+			width: 212px;
+		}
+	}
+
+	@media (width >= 768px) {
+		background-image: url(../../assets/images/hero-992w.webp);
+		height: 298px;
+
+		&__book {
+			font-size: 1.6rem;
+		}
+
+		&__text {
+			font-size: 2rem;
+		}
+
+		&__verse {
+			width: 235px;
+		}
+	}
+
+	@media (width >= 1200px) {
+		background-image: url(../../assets/images/hero-1200w.webp);
+		height: 354px;
+
+		&__book {
+			font-size: 1.8rem;
+		}
+
+		&__text {
+			font-size: 2.2rem;
+		}
+
+		&__verse {
+			width: 354px;
+		}
 	}
 }
