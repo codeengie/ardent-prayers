@@ -9,6 +9,7 @@ const Card = (props) => {
 	const isPrayed = localStorage.getItem(`prayed_${props.data.PrayerId}`) === 'true';
 	const ctx = useContext(PrayersContext);
 	const countRef = useRef(null);
+	const customClass = props.className ? `card ${props.className}` : 'card';
 
 	const setPrayer = async () => {
 		// Get the current prayer counter element
@@ -26,7 +27,7 @@ const Card = (props) => {
 	}
 
 	return (
-		<div className="card">
+		<div className={customClass}>
 			<h1 className="card__name">{props.data.Name}</h1>
 			<h2 className="card__title">{props.data.Title}</h2>
 			<p className="card__message">{props.data.Message}</p>
