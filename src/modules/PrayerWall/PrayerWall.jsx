@@ -40,6 +40,7 @@ const PrayerWall = () => {
 				columnsCountBreakPoints={{ 768: 2, 992: 3, 1200: 4 }}
 			>
 				<Masonry
+					className="prayer-wall__masonry"
 					gutter="10px"
 				>
 					{content}

@@ -18,7 +18,7 @@
 
 	&__book {
 		align-self: end;
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	&__verse {
@@ -29,14 +29,14 @@
 	}
 
 	&__text {
-		font-size: 1.4rem;
+		font-size: 1.5rem;
 	}
 
 	@media (width <= 575px) {
 		justify-content: center;
 
 		&__verse {
-			width: 266px;
+			width: 286px;
 		}
 	}
 
@@ -55,7 +55,7 @@
 		&__verse {
 			position: absolute;
 			right: 20px;
-			width: 212px;
+			width: 342px;
 		}
 	}
 
@@ -72,7 +72,7 @@
 		}
 
 		&__verse {
-			width: 235px;
+			width: 380px;
 		}
 	}
 
@@ -89,7 +89,7 @@
 		}
 
 		&__verse {
-			width: 354px;
+			width: 418px;
 		}
 	}
 }

@@ -8,6 +8,20 @@
 		}
 	}
 
+	&__brick {
+		box-shadow: 3px 3px 4px var(--silver);
+	}
+
+	&__masonry {
+		@media (width >= 992px) {
+			gap: 16px !important;
+
+			> div {
+				gap: 16px !important;
+			}
+		}
+	}
+
 	&__title {
 		font-size: 1.8rem;
 		margin-bottom: 30px;
