@@ -1,6 +1,13 @@
 .prayer-wall {
 	padding: 24px 20px 0;
 
+	@media (width >= 1200px) {
+		padding: {
+			left: 0;
+			right: 0;
+		}
+	}
+
 	&__title {
 		font-size: 1.8rem;
 		margin-bottom: 30px;
