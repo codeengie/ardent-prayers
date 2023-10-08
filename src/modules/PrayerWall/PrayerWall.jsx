@@ -3,6 +3,7 @@ import Card from '../../components/Card/Card.jsx';
 import { useContext } from 'react';
 import PrayersContext from '../../store/prayers-context.jsx';
 import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader.jsx';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 const PrayerWall = () => {
 	const ctx = useContext(PrayersContext);
@@ -16,6 +17,7 @@ const PrayerWall = () => {
 		content = sortedPrayers.map(prayer =>
 			<Card
 				key={prayer.PrayerId}
+				className="prayer-wall__brick"
 				data={prayer}
 			/>
 		);
@@ -34,9 +36,15 @@ const PrayerWall = () => {
 	return (
 		<div className="prayer-wall">
 			<h1 className="prayer-wall__title">Prayer Wall</h1>
-			<div className="prayer-wall__content">
-				{content}
-			</div>
+			<ResponsiveMasonry
+				columnsCountBreakPoints={{ 768: 2, 992: 3, 1200: 4 }}
+			>
+				<Masonry
+					gutter="10px"
+				>
+					{content}
+				</Masonry>
+			</ResponsiveMasonry>
 		</div>
 	)
 }
