@@ -1,3 +1,5 @@
+$font-family: 'Montserrat', Arial, sans-serif;
+
 :root {
 	// Color scheme
 	--affair: #6c478c;
@@ -23,7 +25,7 @@
 	background-color: var(--white);
 	color: var(--black);
 	font: {
-		family: 'Montserrat', Arial, sans-serif;
+		family: $font-family;
 		size: 62.5%;
 		weight: var(--weight-regular);
 	}
@@ -51,11 +53,12 @@ p {
 }
 
 body {
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 }
 
 button {
 	background-color: transparent;
+	font-family: $font-family; // Like inputs and text this must be specified
 	border-style: none;
 	cursor: pointer;
 }
