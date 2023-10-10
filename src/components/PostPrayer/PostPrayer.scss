@@ -10,6 +10,14 @@
 	transition: all .2s ease;
 	z-index: 1020;
 
+	@media (width >= 576px) {
+		width: 400px;
+	}
+
+	@media (width >= 992px) {
+		width: 500px;
+	}
+
 	&__bottom {
 		height: 48px;
 		overflow: hidden;
