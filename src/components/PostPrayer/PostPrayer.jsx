@@ -17,7 +17,7 @@ const PostPrayer = () => {
 	const ctxPrayers = useContext(PrayersContext);
 	const toggleClass = ctxModal.isModalOpen ? 'post-prayer post-prayer--show' : 'post-prayer';
 	let formIsValid = false;
-	const [status, setStatus] = useState('Posting prayer...');
+	const [status, setStatus] = useState('');
 	const [postClass, setPostClass] = useState('');
 
 	// Name input
@@ -77,7 +77,8 @@ const PostPrayer = () => {
 			return;
 		}
 
-		setPostClass('post-prayer--posting');
+		setStatus('Posting prayer...');
+		setPostClass(' post-prayer--posting');
 
 		// Create form data object
 		const formData = {
@@ -96,18 +97,18 @@ const PostPrayer = () => {
 		}
 
 		setStatus('Prayer posted.');
-		setPostClass('post-prayer--posted');
+		setPostClass(' post-prayer--posted');
 
 		setTimeout(() => {
 			resetForm();
 			ctxModal.onModalClick();
 			setPostClass('');
-			setStatus('Posting prayer...');
+			setStatus('');
 		}, 3000);
 	}
 
 	return (
-		<div className={`${toggleClass} ${postClass}`}>
+		<div className={`${toggleClass}${postClass}`}>
 			<Button cName="post-prayer__close" onClick={ctxModal.onModalClick}/>
 			<div className="post-prayer__top">
 				<div className="post-prayer__status">{status}</div>

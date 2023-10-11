@@ -8,6 +8,8 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 const PrayerWall = () => {
 	const ctx = useContext(PrayersContext);
 	let content = '';
+	const skeletonCount = 10;
+	const skeletons = [];
 
 	// Output prayer requests
 	if (ctx.prayers.length > 0) {
@@ -30,7 +32,11 @@ const PrayerWall = () => {
 
 	// Display loader while fetching prayer requests
 	if (ctx.isLoading) {
-		content = <SkeletonLoader count="4"/>
+		for (let i = 0; i < skeletonCount; i++) {
+			skeletons.push(<SkeletonLoader key={i} className="prayer-wall__brick" count="1"/>);
+		}
+
+		content = skeletons;
 	}
 
 	return (

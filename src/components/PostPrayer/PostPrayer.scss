@@ -2,6 +2,7 @@
 	$self: &;
 
 	display: none;
+	height: 444px;
 	left: 50%;
 	position: fixed;
 	overflow: hidden;
@@ -87,22 +88,18 @@
 		background-color: var(--white);
 	}
 
+
+	// Modifier(s)
 	&--posted,
 	&--posting {
-		transition: all .3s ease-in;
+		height: 66px;
+		transition: all .2s ease-in;
+		width: 160px;
 
 		#{$self} {
-			&__bottom {
-				height: 6px;
-			}
-
-			&__button,
-			&__loader.loader-line {
-				transition: all .3s ease;
-			}
-
 			&__button {
 				height: 0;
+				transition: height .1s ease;
 			}
 
 			&__close,
@@ -112,6 +109,7 @@
 
 			&__loader.loader-line {
 				height: 6px;
+				transition: height .1s ease;
 			}
 
 			&__status {
@@ -123,16 +121,16 @@
 				display: flex;
 				height: 60px;
 				justify-content: center;
-				width: 160px;
+				overflow: hidden;
 			}
 		}
 	}
 
-	// Note the placement order to override the height above @todo Break styles so this is unnecessary
 	&--posted {
 		#{$self} {
 			&__loader.loader-line {
 				height: 0;
+				transition: height .2s ease-in;
 			}
 		}
 	}
