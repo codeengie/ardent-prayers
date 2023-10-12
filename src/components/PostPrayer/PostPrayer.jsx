@@ -7,7 +7,8 @@ import useInput from '../../hooks/use-input.jsx';
 import FormTextArea from '../Form/FormTextArea/FormTextArea.jsx';
 import PrayersContext from '../../store/prayers-context.jsx';
 import '../Form/FormBase.scss';
-import LoaderLine from "../LoaderLine/LoaderLine.jsx";
+import LoaderLine from '../LoaderLine/LoaderLine.jsx';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
 const validateInput = value => value.trim() !== '' && !/[\d!@#$%^&*()_+{}\[\]:;<>~\\]/.test(value.trim());
@@ -19,6 +20,7 @@ const PostPrayer = () => {
 	let formIsValid = false;
 	const [status, setStatus] = useState('');
 	const [postClass, setPostClass] = useState('');
+	const [isCaptchaChecked, setIsCaptchaChecked] = useState(false);
 
 	// Name input
 	const {
@@ -53,6 +55,11 @@ const PostPrayer = () => {
 		reset: messageReset
 	} = useInput(validateInput);
 
+	const onCaptchaHandler = () => {
+		// Toggle the boolean because Recaptcha resets itself after a few minutes
+		setIsCaptchaChecked(!isCaptchaChecked);
+	}
+
 	// Reset form. I added useCallback() to prevent re-render error
 	const resetForm = useCallback(() => {
 		nameReset();
@@ -68,7 +75,7 @@ const PostPrayer = () => {
 	}, [ctxModal.isModalOpen, resetForm]);
 
 	// Check if form is valid
-	if (nameIsValid && titleIsValid && messageIsValid) {
+	if (nameIsValid && titleIsValid && messageIsValid && isCaptchaChecked) {
 		formIsValid = true;
 	}
 
@@ -107,6 +114,7 @@ const PostPrayer = () => {
 			ctxModal.onModalClick();
 			setPostClass('');
 			setStatus('');
+			setIsCaptchaChecked(false);
 		}, 3000);
 	}
 
@@ -148,6 +156,12 @@ const PostPrayer = () => {
 						onChange={messageHandleChange}
 						onFocus={messageHandleFocus}
 						value={messageValue}
+					/>
+
+					<ReCAPTCHA
+						className="post-prayer__sepaque"
+						onChange={onCaptchaHandler}
+						sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
 					/>
 				</form>
 			</div>
