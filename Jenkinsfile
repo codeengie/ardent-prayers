@@ -83,6 +83,7 @@ node {
         		'''
         			VITE_API_URL="${VITE_API_URL}"
         			VITE_API_KEY="${VITE_API_KEY}"
+        			VITE_CAPTCHA_SITE_KEY="${VITE_CAPTCHA_SITE_KEY}"
         		''',
         		fileName: "${WORKSPACE}/.env.production"
         	)
