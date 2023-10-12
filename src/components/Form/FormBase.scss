@@ -20,8 +20,13 @@
 		&--error {
 			#{$self} {
 				&__message {
+					height: 42px;
 					opacity: 1;
-					transition: opacity .3s ease;
+					transition: opacity .3s ease, height .2s ease;
+
+					@media (width >= 576px) {
+						height: 21px;
+					}
 				}
 
 				&__wrap {
@@ -59,9 +64,10 @@
 
 	&__message {
 		color: var(--monza);
+		height: 0;
 		opacity: 0;
 		padding: 2px 2px 2px 0;
-		transition: opacity .2s ease;
+		transition: all .2s ease;
 	}
 
 	&__wrap {

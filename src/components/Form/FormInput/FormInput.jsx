@@ -10,6 +10,7 @@ const FormInput = (props) => {
 				<input
 					className="form__input"
 					id={props.id}
+					maxLength={props.maxLength}
 					name={props.id}
 					onBlur={props.onBlur}
 					onChange={props.onChange}
@@ -18,7 +19,7 @@ const FormInput = (props) => {
 					value={props.value}
 				/>
 			</div>
-			<p className="form__message">Please enter a {props.id}</p>
+			<p className="form__message">Enter a valid {props.id} without special characters or numbers</p>
 		</div>
 	)
 }
