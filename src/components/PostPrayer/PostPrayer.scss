@@ -2,7 +2,7 @@
 	$self: &;
 
 	display: none;
-	height: 444px;
+	min-height: 402px;
 	left: 50%;
 	position: fixed;
 	overflow: hidden;
@@ -20,17 +20,9 @@
 	}
 
 	&__bottom {
-		height: 48px;
 		overflow: hidden;
 		position: relative;
 		transition: all .2s ease;
-	}
-
-	&__button,
-	&__loader.loader-line {
-		left: 0;
-		position: absolute;
-		top: 0;
 	}
 
 	&__button {
@@ -63,11 +55,14 @@
 	}
 
 	&__form {
-		padding: 24px 16px 10px;
+		padding: 24px 16px 30px;
 	}
 
 	&__loader.loader-line {
 		height: 0;
+		left: 0;
+		position: absolute;
+		top: 0;
 	}
 
 	&__status {
@@ -92,14 +87,14 @@
 	// Modifier(s)
 	&--posted,
 	&--posting {
-		height: 66px;
+		min-height: 66px;
 		transition: all .2s ease-in;
 		width: 160px;
 
 		#{$self} {
 			&__button {
 				height: 0;
-				transition: height .1s ease;
+				transition: height .05s ease;
 			}
 
 			&__close,
@@ -109,7 +104,7 @@
 
 			&__loader.loader-line {
 				height: 6px;
-				transition: height .1s ease;
+				transition: height .05s ease;
 			}
 
 			&__status {

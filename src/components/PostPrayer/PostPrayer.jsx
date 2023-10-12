@@ -10,7 +10,7 @@ import '../Form/FormBase.scss';
 import LoaderLine from "../LoaderLine/LoaderLine.jsx";
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
-const isInputEmpty = value => value.trim() !== '';
+const validateInput = value => value.trim() !== '' && !/[\d!@#$%^&*()_+{}\[\]:;<>~\\]/.test(value.trim());
 
 const PostPrayer = () => {
 	const ctxModal = useContext(ModalContext);
@@ -23,32 +23,35 @@ const PostPrayer = () => {
 	// Name input
 	const {
 		inputValue: nameValue,
-		inputIsInvalid: nameIsInvalid,
+		inputIsValid: nameIsValid,
+		inputIsInvalid: nameIsInvalid, // hasError
 		handleBlur: nameHandleBlur,
 		handleChange: nameHandleChange,
 		handleFocus: nameHandleFocus,
 		reset: nameReset
-	} = useInput(isInputEmpty);
+	} = useInput(validateInput);
 
 	// Title input
 	const {
 		inputValue: titleValue,
+		inputIsValid: titleIsValid,
 		inputIsInvalid: titleIsInvalid,
 		handleBlur: titleHandleBlur,
 		handleChange: titleHandleChange,
 		handleFocus: titleHandleFocus,
 		reset: titleReset
-	} = useInput(isInputEmpty);
+	} = useInput(validateInput);
 
 	// Message textarea
 	const {
 		inputValue: messageValue,
+		inputIsValid: messageIsValid,
 		inputIsInvalid: messageIsInvalid,
 		handleBlur: messageHandleBlur,
 		handleChange: messageHandleChange,
 		handleFocus: messageHandleFocus,
 		reset: messageReset
-	} = useInput(isInputEmpty);
+	} = useInput(validateInput);
 
 	// Reset form. I added useCallback() to prevent re-render error
 	const resetForm = useCallback(() => {
@@ -65,7 +68,7 @@ const PostPrayer = () => {
 	}, [ctxModal.isModalOpen, resetForm]);
 
 	// Check if form is valid
-	if (nameValue && titleValue && messageValue) {
+	if (nameIsValid && titleIsValid && messageIsValid) {
 		formIsValid = true;
 	}
 
@@ -118,6 +121,7 @@ const PostPrayer = () => {
 						id="name"
 						hasError={nameIsInvalid}
 						label="Name"
+						maxLength="40"
 						onBlur={nameHandleBlur}
 						onChange={nameHandleChange}
 						onFocus={nameHandleFocus}
@@ -128,6 +132,7 @@ const PostPrayer = () => {
 						id="title"
 						hasError={titleIsInvalid}
 						label="Title"
+						maxLength="80"
 						onBlur={titleHandleBlur}
 						onChange={titleHandleChange}
 						onFocus={titleHandleFocus}
@@ -138,7 +143,7 @@ const PostPrayer = () => {
 						id="message"
 						hasError={messageIsInvalid}
 						label="Message"
-						maxCount="300"
+						maxCount="400"
 						onBlur={messageHandleBlur}
 						onChange={messageHandleChange}
 						onFocus={messageHandleFocus}

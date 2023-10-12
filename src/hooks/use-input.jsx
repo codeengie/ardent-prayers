@@ -30,7 +30,8 @@ const useInput = (validateValue) => {
 	// Expose variables and functions to our components
 	return {
 		inputValue,
-		inputIsInvalid,
+		inputIsValid,
+		inputIsInvalid, // hasError
 		handleBlur,
 		handleChange,
 		handleFocus,
