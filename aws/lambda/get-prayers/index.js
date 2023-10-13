@@ -10,7 +10,7 @@ import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
 
 const dynamodb = new DynamoDBClient();
-const tableName = 'ArdentPrayers_Dev';
+const tableName = process.env.DB_TABLE_NAME;
 
 export const handler = async (event, context) => {
 	const command = new ScanCommand({
@@ -25,9 +25,11 @@ export const handler = async (event, context) => {
 		// Notice promise() is not required with the new API
 		const prayers = await dynamodb.send(command);
 
-		if (prayers) {
+		if (prayers.Items.length) {
 			// Convert DynamoDB record into a JavaScript object
 			body = prayers.Items.map(obj => unmarshall(obj));
+		} else {
+			body = 'No prayer requests found.';
 		}
 
 	} catch (err) {
