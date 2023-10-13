@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import ModalContext from '../../store/modal-context.jsx';
 import './PostPrayer.scss';
 import Button from '../Button/Button.jsx';
@@ -21,6 +21,7 @@ const PostPrayer = () => {
 	const [status, setStatus] = useState('');
 	const [postClass, setPostClass] = useState('');
 	const [isCaptchaChecked, setIsCaptchaChecked] = useState(false);
+	const recaptchaRef = useRef();
 
 	// Name input
 	const {
@@ -94,7 +95,8 @@ const PostPrayer = () => {
 		const formData = {
 			formName: nameValue,
 			formTitle: titleValue,
-			formMessage: messageValue
+			formMessage: messageValue,
+			formToken: recaptchaRef.current.getValue()
 		}
 
 		// Invoke API and post prayer
@@ -115,6 +117,7 @@ const PostPrayer = () => {
 			setPostClass('');
 			setStatus('');
 			setIsCaptchaChecked(false);
+			recaptchaRef.current.reset();
 		}, 3000);
 	}
 
@@ -125,6 +128,7 @@ const PostPrayer = () => {
 				<div className="post-prayer__status">{status}</div>
 				<form className="post-prayer__form">
 					<h2 className="post-prayer__title">Post A New Prayer</h2>
+					<p className="post-prayer__instructions">Please share your prayer request. You may use commas and periods to separate your thoughts.</p>
 					<FormInput
 						id="name"
 						hasError={nameIsInvalid}
@@ -161,6 +165,7 @@ const PostPrayer = () => {
 					<ReCAPTCHA
 						className="post-prayer__sepaque"
 						onChange={onCaptchaHandler}
+						ref={recaptchaRef}
 						sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
 					/>
 				</form>
