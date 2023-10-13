@@ -161,7 +161,6 @@ const PostPrayer = () => {
 						onFocus={messageHandleFocus}
 						value={messageValue}
 					/>
-
 					<ReCAPTCHA
 						className="post-prayer__sepaque"
 						onChange={onCaptchaHandler}
