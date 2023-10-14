@@ -12,7 +12,7 @@ const PrayerWall = () => {
 	const skeletons = [];
 
 	// Output prayer requests
-	if (ctx.prayers.length > 0) {
+	if (Array.isArray(ctx.prayers) && ctx.prayers.length > 0) {
 		// Sort prayers in descending order
 		const sortedPrayers = ctx.prayers.sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate)).reverse();
 
@@ -23,11 +23,13 @@ const PrayerWall = () => {
 				data={prayer}
 			/>
 		);
+	} else {
+		content = <p className="prayer-wall__error">{ctx.prayers}</p>
 	}
 
 	// Display an error message if unable to fetch prayer requests
 	if (ctx.error) {
-		content = <p>{ctx.error}</p>
+		content = <p className="prayer-wall_error">{ctx.error}</p>
 	}
 
 	// Display loader while fetching prayer requests
