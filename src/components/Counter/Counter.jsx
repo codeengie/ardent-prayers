@@ -1,8 +1,10 @@
 import './Counter.scss';
 
 const Counter = (props) => {
+	const customClass = props.count === 0 ? `${props.cName} counter counter--no-count` : `${props.cName} counter`;
+
 	return (
-		<div className={`${props.cName} counter`} ref={props.forwardedRef}>
+		<div className={customClass} ref={props.forwardedRef}>
 			<span className="counter__icon"></span>
 			{props.count !== 0 && <p className="counter__count">{`${props.count} Prayed`}</p>}
 			<span className="counter__icon counter__icon--flip"></span>

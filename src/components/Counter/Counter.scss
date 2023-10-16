@@ -15,12 +15,16 @@
 		background: transparent url(../../assets/images/praying_hands.svg) no-repeat 0 0 / cover;
 		display: block;
 		height: 16.8px;
-		margin-right: 2px;
 		width: 8px;
 
 		&--flip {
 			background-position-x: -8px;
-			margin: 0 0 0 2px;
+		}
+	}
+
+	&--no-count {
+		#{$self}__icon {
+			margin-right: 2px;
 		}
 	}
 }
