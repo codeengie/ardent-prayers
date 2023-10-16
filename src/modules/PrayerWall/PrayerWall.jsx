@@ -8,7 +8,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 const PrayerWall = () => {
 	const ctx = useContext(PrayersContext);
 	let content = '';
-	const skeletonCount = 10;
+	const skeletonCount = 6;
 	const skeletons = [];
 
 	// Output prayer requests
