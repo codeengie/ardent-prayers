@@ -11,14 +11,8 @@ const PrayerWall = () => {
 	const skeletonCount = 10;
 	const skeletons = [];
 
-	/**
-	 * Output prayer requests
-	 * Note: The prayer wall explodes with undefined prayer request when you post the very first prayer. I observed
-	 * this issue after I cleansed the database. The component complains about having an ID on each which I'm already
-	 * doing. Once the first prayer is posted the issue goes away.
-	 * @todo Fix first prayer post issue
-	 */
-	if (Array.isArray(ctx.prayers) && ctx.prayers.length > 0) {
+	// Output prayer requests
+	if (ctx.prayers.length) {
 		// Sort prayers in descending order
 		const sortedPrayers = ctx.prayers.sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate)).reverse();
 
@@ -30,7 +24,7 @@ const PrayerWall = () => {
 			/>
 		);
 	} else {
-		content = <p className="prayer-wall__error">{ctx.prayers}</p>
+		content = <p className="prayer-wall__error">No prayer requests found.</p>
 	}
 
 	// Display an error message if unable to fetch prayer requests

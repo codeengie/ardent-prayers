@@ -29,7 +29,7 @@ export const handler = async (event, context) => {
 			// Convert DynamoDB record into a JavaScript object
 			body = prayers.Items.map(obj => unmarshall(obj));
 		} else {
-			body = 'No prayer requests found.';
+			body = [];
 		}
 
 	} catch (err) {
