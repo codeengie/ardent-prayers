@@ -11,7 +11,7 @@ import LoaderLine from '../LoaderLine/LoaderLine.jsx';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
-const validateInput = value => value.trim() !== '' && !/[\d!@#$%^&*()_+{}\[\]:;<>~\\]/.test(value.trim());
+const validateInput = value => value.trim() !== '' && !/[!@#$%^&*()_+{}\[\]:;<>~\\]/.test(value.trim());
 
 const PostPrayer = () => {
 	const ctxModal = useContext(ModalContext);
@@ -130,6 +130,7 @@ const PostPrayer = () => {
 					<h2 className="post-prayer__title">Post A New Prayer</h2>
 					<p className="post-prayer__instructions">Please share your prayer request. You may use commas and periods to separate your thoughts.</p>
 					<FormInput
+						errorMessage="Enter a valid name without special characters or numbers"
 						id="name"
 						hasError={nameIsInvalid}
 						label="Name"
@@ -141,6 +142,7 @@ const PostPrayer = () => {
 						type="text"
 					/>
 					<FormInput
+						errorMessage="Enter a valid title without special characters or numbers"
 						id="title"
 						hasError={titleIsInvalid}
 						label="Title"
@@ -152,6 +154,7 @@ const PostPrayer = () => {
 						type="text"
 					/>
 					<FormTextArea
+						errorMessage="Enter a valid message without special characters"
 						id="message"
 						hasError={messageIsInvalid}
 						label="Message"

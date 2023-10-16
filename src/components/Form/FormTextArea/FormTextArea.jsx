@@ -20,7 +20,7 @@ const FormTextArea = (props) => {
 				</textarea>
 				<div className="form__counter">{counter}</div>
 			</div>
-			<p className="form__message">Enter a valid {props.id} without special characters or numbers</p>
+			<p className="form__message">{props.errorMessage}</p>
 		</div>
 	)
 }

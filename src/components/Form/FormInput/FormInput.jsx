@@ -19,7 +19,7 @@ const FormInput = (props) => {
 					value={props.value}
 				/>
 			</div>
-			<p className="form__message">Enter a valid {props.id} without special characters or numbers</p>
+			<p className="form__message">{props.errorMessage}</p>
 		</div>
 	)
 }
