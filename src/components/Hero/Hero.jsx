@@ -1,31 +1,28 @@
 import './Hero.scss';
 
 /**
- * Import all hero images
+ * Dynamically import all the hero images. I ran into an issue with the previous solution where the images would
+ * throw an error when the project is built for production. I found a secondary solution on the Vite repo in GitHub.
  * @link https://vitejs.dev/guide/features.html#glob-import
+ * @link https://github.com/vitejs/vite/discussions/12191
  */
-const images = import.meta.glob('../../assets/images/hero-*w.webp');
-const breakpoints = [];
+const imageImports = Object.values(import.meta.glob('../../assets/images/hero-*w.webp', { eager: true, as: 'url' }));
+const responsiveImages = imageImports.map(image => {
+	let keyVal = {};
+	const matched = image.match(/\d+/);
 
-// Iterate over the keys of the image object
-for (const path in images) {
-	images[path]().then(image => {
-		let imgData = {};
-		const matched = image.default.match(/\d+/); // `match()` returns an array
+	keyVal.path = image;
+	keyVal.width = matched[0];
 
-		imgData.width = matched[0];
-		imgData.path = image.default;
-
-		breakpoints.push(imgData);
-	});
-}
+	return keyVal;
+});
 
 const Hero = () => {
-	const imageSizes = breakpoints
-		.map(breakpoint => `(max-width: ${breakpoint.width}px) ${breakpoint.width}w`).toString();
-	const imageSources = breakpoints
-		.map(breakpoint => `${breakpoint.path} ${breakpoint.width}w`).toString();
-	const fallback = breakpoints.find(element => element.width === '1200');
+	const imageSizes = responsiveImages
+		.map(size => `(max-width: ${size.width}px) ${size.width}w`).toString();
+	const imageSources = responsiveImages
+		.map(source => `${source.path} ${source.width}w`).toString();
+	const imageFallback = responsiveImages.find(image => image.width === '1200');
 
 	return (
 		<div className="hero">
@@ -35,7 +32,7 @@ const Hero = () => {
 				height="200"
 				sizes={imageSizes}
 				srcSet={imageSources}
-				src={fallback.path}
+				src={imageFallback.path}
 				width="286"
 			/>
 			<blockquote className="hero__verse">
