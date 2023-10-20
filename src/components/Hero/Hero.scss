@@ -1,14 +1,20 @@
 .hero {
 	align-items: center;
-	background: var(--dove-gray) url(../../assets/images/hero-576w.webp) 0 0 no-repeat;
-	background-size: cover;
+	background-color: var(--mobster);
 	display: flex;
 	height: 200px;
+	overflow: hidden;
 	position: relative;
 
 	@media (width >= 1200px) {
 		margin: 0 auto;
 		width: 1200px;
+	}
+
+	&__bg {
+		position: absolute;
+		height: 200px;
+		width: 100%;
 	}
 
 	&__book,
@@ -26,6 +32,8 @@
 		display: flex;
 		flex-flow: column;
 		font-weight: var(--weight-semibold);
+		position: relative;
+		z-index: 6;
 	}
 
 	&__text {
@@ -41,8 +49,11 @@
 	}
 
 	@media (width >= 576px) {
-		background-image: url(../../assets/images/hero-768w.webp);
 		height: 280px;
+
+		&__bg {
+			height: 280px;
+		}
 
 		&__book {
 			font-size: 1.4rem;
@@ -60,8 +71,11 @@
 	}
 
 	@media (width >= 768px) {
-		background-image: url(../../assets/images/hero-992w.webp);
 		height: 298px;
+
+		&__bg {
+			height: 298px;
+		}
 
 		&__book {
 			font-size: 1.6rem;
@@ -77,8 +91,11 @@
 	}
 
 	@media (width >= 1200px) {
-		background-image: url(../../assets/images/hero-1200w.webp);
 		height: 354px;
+
+		&__bg {
+			height: 354px;
+		}
 
 		&__book {
 			font-size: 1.8rem;
