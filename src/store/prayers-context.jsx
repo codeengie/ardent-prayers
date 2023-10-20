@@ -12,7 +12,10 @@ export const PrayersContextProvider = (props) => {
 	const [error, setError] = useState(null);
 	const apiUrl = `${import.meta.env.VITE_API_URL}/prayers`;
 	let settings = {
-		method: 'GET'
+		method: 'GET',
+		headers: {
+			'x-api-key': import.meta.env.VITE_API_KEY
+		}
 	};
 
 	// Get prayer requests
