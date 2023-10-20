@@ -20,7 +20,7 @@ export const handler = async (event) => {
 		},
 		UpdateExpression: 'set PrayerCount = :newCount',
 		ExpressionAttributeValues: {
-			':newCount': event.count
+			':newCount': parseInt(event.count)
 		},
 		ReturnValues: 'ALL_NEW'
 	});
