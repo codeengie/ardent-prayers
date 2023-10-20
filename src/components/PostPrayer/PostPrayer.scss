@@ -77,6 +77,14 @@
 		display: none;
 		font-weight: var(--weight-semibold);
 		text-align: center;
+
+		@media (width >= 576px) {
+			font-size: 16px;
+		}
+
+		@media (width >= 768px) {
+			font-size: 18px;
+		}
 	}
 
 	&__title {
@@ -98,6 +106,14 @@
 		min-height: 66px;
 		transition: all .2s ease-in;
 		width: 160px;
+
+		@media (width >= 576px) {
+			width: 180px;
+		}
+
+		@media (width >= 768px) {
+			width: 200px;
+		}
 
 		#{$self} {
 			&__button {
