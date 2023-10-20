@@ -10,26 +10,14 @@ export const PrayersContextProvider = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [prayers, setPrayers] = useState([]);
 	const [error, setError] = useState(null);
+	const apiUrl = `${import.meta.env.VITE_API_URL}/prayers`;
+	let settings = {
+		method: 'GET'
+	};
 
-	const connectToApi = async (type = 'GET', id = null, date = null, count = null) => {
-		const settings = {
-			method: type/*,
-			headers: {
-				'Content-Type': 'application/json',
-				'x-api-key': import.meta.env.VITE_API_KEY
-			}*/
-		};
-		let apiUrl = `${import.meta.env.VITE_API_URL}/prayers`;
-
-		if (type === 'GET') {
-			setIsLoading(true);
-		}
-
-		if (id) {
-			apiUrl += `?id=${id}&date=${date}&count=${count}`;
-		}
-
-		setError(null);
+	// Get prayer requests
+	const fetchPrayers = useCallback(async () => {
+		setIsLoading(true);
 
 		try {
 			const response = await fetch(apiUrl, settings);
@@ -38,26 +26,19 @@ export const PrayersContextProvider = (props) => {
 				new Error(`Request failed with status: ${response.status}`);
 			}
 
-			if (!id) {
-				return response.json();
-			}
+			const prayerData = await response.json();
+			setPrayers(JSON.parse(prayerData.body));
 
 		} catch (error) {
 			setError(error.message);
-			console.log('Error:', error.message);
-
 		} finally {
 			setIsLoading(false);
 		}
-	};
 
-	const fetchPrayers = useCallback(async () => {
-		const data = await connectToApi();
-		setPrayers(JSON.parse(data.body));
 	}, []);
 
 	/**
-	 * Updates the prayer count on a single prayer item
+	 * Updates the prayer count on a prayer post
 	 * @param id - UUID of the prayer you want to update
 	 * @param date - The date the prayer was requested
 	 * @param count - Number of times the prayer has been prayed for
@@ -65,30 +46,39 @@ export const PrayersContextProvider = (props) => {
 	 */
 	const updatePrayerCount = async (id, date, count) => {
 		const newCount = count + 1;
-		/**
-		 * Initially I was trying to update the prayer count by finding the prayer's index in the array but
-		 * when I invoked setState it would not update or render. I was trying to avoid copying the entire
-		 * array in general for performance reasons but there are other ways of mitigating the hit by
-		 * limiting results or only rendering prayers in the user's viewport. For now this will do!
-		 * @todo Emulate what you did in postNewPrayer by using `prev` hook
-		 */
-		const updatedPrayer = prayers.map(
-			prayer => prayer.PrayerId === id ? {...prayer, PrayerCount: newCount } : prayer);
 
-		// Send new count to API
-		await connectToApi('PUT', id, date, newCount);
-		setPrayers(updatedPrayer);
+		try {
+			settings.method = 'PUT'
+			const response = await fetch(`${apiUrl}?id=${id}&date=${date}&count=${newCount}`, settings);
+
+			if (!response.ok) {
+				new Error(`Updating prayer count failed with status: ${response.status}`);
+			}
+
+			/**
+			 * Initially I was trying to update the prayer count by finding the prayer's index in the array but
+			 * when I invoked setState it would not update or render. I was trying to avoid copying the entire
+			 * array in general for performance reasons but there are other ways of mitigating the hit by
+			 * limiting results or only rendering prayers in the user's viewport. For now this will do!
+			 * @todo Emulate what you did in postNewPrayer by using `prev` hook
+			 */
+			const updatedPrayer = prayers.map(
+				prayer => prayer.PrayerId === id ? {...prayer, PrayerCount: newCount } : prayer);
+
+			setPrayers(updatedPrayer);
+
+		} catch (error) {
+			setError(error.message);
+		}
 	};
 
 	// Post new prayer request
 	const postNewPrayer = async (data) => {
-		const settings = {
-			method: 'POST',
-			body: JSON.stringify(data)
-		}
+		settings.method = 'POST';
+		settings.body = JSON.stringify(data);
 
 		try {
-			const response = await fetch(`${import.meta.env.VITE_API_URL}/prayers`, settings);
+			const response = await fetch(apiUrl, settings);
 
 			if (!response.ok) {
 				new Error(`Prayer request was not posted: ${response.status}`);
@@ -104,13 +94,12 @@ export const PrayersContextProvider = (props) => {
 			return postData.statusCode;
 
 		} catch (error) {
-			console.log(`Error: ${error.message}`);
+			setError(error.message);
 		}
 	}
 
 	useEffect(() => {
 		fetchPrayers();
-		console.log('Fetch Prayers');
 	}, [fetchPrayers]);
 
 	return <PrayersContext.Provider value={{error: error, isLoading: isLoading, prayers: prayers, updatePrayerCount, postNewPrayer}}>{props.children}</PrayersContext.Provider>
