@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useRef, useState} from 'react';
+import { lazy, Suspense, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import ModalContext from '../../store/modal-context.jsx';
 import './PostPrayer.scss';
 import Button from '../Button/Button.jsx';
@@ -8,7 +8,14 @@ import FormTextArea from '../Form/FormTextArea/FormTextArea.jsx';
 import PrayersContext from '../../store/prayers-context.jsx';
 import '../Form/FormBase.scss';
 import LoaderLine from '../LoaderLine/LoaderLine.jsx';
-import ReCAPTCHA from 'react-google-recaptcha';
+
+/**
+ * Lazy load component(s)
+ *
+ * I'm lazy loading Recaptcha component to improve PageSpeed score in mobile. The app is getting penalized for
+ * using Recaptcha.
+ */
+const Recaptcha = lazy(() => import ('../Recaptcha/Recaptcha.jsx'));
 
 // Put this outside because it's not a function that requires to be rebuilt if the component is rebuilt
 const validateInput = value => value.trim() !== '' && !/[!@#$%^&*()_+{}\[\]:;<>~\\]/.test(value.trim());
@@ -22,6 +29,7 @@ const PostPrayer = () => {
 	const [postClass, setPostClass] = useState('');
 	const [isCaptchaChecked, setIsCaptchaChecked] = useState(false);
 	const recaptchaRef = useRef();
+	const [isCaptchaLoaded, setCaptchaLoaded] = useState(false);
 
 	// Name input
 	const {
@@ -121,6 +129,13 @@ const PostPrayer = () => {
 		}, 3000);
 	}
 
+	// Lazy load Recaptcha component when the modal is displayed, this will only trigger on the first run
+	if (ctxModal.isModalOpen) {
+		if (!isCaptchaLoaded) {
+			setCaptchaLoaded(true);
+		}
+	}
+
 	return (
 		<div className={`${toggleClass}${postClass}`}>
 			<Button cName="post-prayer__close" onClick={ctxModal.onModalClick}/>
@@ -164,12 +179,14 @@ const PostPrayer = () => {
 						onFocus={messageHandleFocus}
 						value={messageValue}
 					/>
-					<ReCAPTCHA
-						className="post-prayer__sepaque"
-						onChange={onCaptchaHandler}
-						ref={recaptchaRef}
-						sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
-					/>
+					<Suspense fallback={<div>Loading...</div>}>
+						{isCaptchaLoaded && <Recaptcha
+							apikey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
+							cName="post-prayer__sepaque"
+							onChange={onCaptchaHandler}
+							refVal={recaptchaRef}
+						/>}
+					</Suspense>
 				</form>
 			</div>
 			<div className="post-prayer__bottom">
