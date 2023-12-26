@@ -1,3 +1,5 @@
+@import './styles/fonts';
+
 $font-family: 'Montserrat', Arial, sans-serif;
 
 :root {
@@ -20,7 +22,6 @@ $font-family: 'Montserrat', Arial, sans-serif;
 	// Typeface weights
 	--weight-regular: 400;
 	--weight-semibold: 600;
-	--weight-bold: 700;
 
 	background-color: var(--white);
 	color: var(--black);
