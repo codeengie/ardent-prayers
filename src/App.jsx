@@ -1,4 +1,3 @@
-//import { lazy } from 'react';
 import { ModalContextProvider } from './store/modal-context.jsx';
 import './App.scss'
 import Footer from './components/Footer/Footer.jsx';

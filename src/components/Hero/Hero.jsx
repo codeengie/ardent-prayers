@@ -29,6 +29,7 @@ const Hero = () => {
 			<img
 				alt="A man praying with his head down, hands closed together with fingers crossed."
 				className="hero__bg"
+				fetchpriority="high"
 				height="200"
 				sizes={imageSizes}
 				srcSet={imageSources}
