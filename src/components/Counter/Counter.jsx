@@ -1,5 +1,6 @@
 import './Counter.scss';
 
+// Counter component displays the prayer count along with the praying hands icon
 const Counter = (props) => {
 	const customClass = props.count === 0 ? `${props.cName} counter counter--no-count` : `${props.cName} counter`;
 

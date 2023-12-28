@@ -11,9 +11,7 @@ import LoaderLine from '../LoaderLine/LoaderLine.jsx';
 
 /**
  * Lazy load component(s)
- *
- * I'm lazy loading Recaptcha component to improve PageSpeed score in mobile. The app is getting penalized for
- * using Recaptcha.
+ * I'm lazy loading Recaptcha component to improve PageSpeed score in mobile.
  */
 const Recaptcha = lazy(() => import ('../Recaptcha/Recaptcha.jsx'));
 

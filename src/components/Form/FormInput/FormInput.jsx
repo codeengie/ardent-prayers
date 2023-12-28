@@ -1,5 +1,6 @@
 import './FormInput.scss';
 
+// Base input component
 const FormInput = (props) => {
 	const hasError = props.hasError ? 'form__field form__field--error' : 'form__field';
 

@@ -1,6 +1,7 @@
 import './Brand.scss';
 import brandLogo from '../../assets/images/logo.svg';
 
+// Display branding
 const Brand = () => {
 	return (
 		<h1 className="brand">

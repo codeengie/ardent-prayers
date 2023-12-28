@@ -44,6 +44,7 @@ const PrayerWall = () => {
 	return (
 		<div className="prayer-wall">
 			<h1 className="prayer-wall__title">Prayer Wall</h1>
+			{/* @todo Masonry component should only be added once all the data is available */}
 			<ResponsiveMasonry
 				columnsCountBreakPoints={{ 768: 2, 992: 3, 1200: 4 }}
 			>

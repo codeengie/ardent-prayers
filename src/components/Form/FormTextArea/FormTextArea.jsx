@@ -1,5 +1,6 @@
 import './FormTextArea.scss';
 
+// Base textarea component
 const FormTextArea = (props) => {
 	const hasError = props.hasError ? 'form__field form__field--error' : 'form__field';
 	const counter = `${props.value.length} / ${props.maxCount}`;

@@ -14,11 +14,11 @@ export const PrayersContextProvider = (props) => {
 	let settings = {
 		method: 'GET',
 		headers: {
-			'x-api-key': import.meta.env.VITE_API_KEY
+			'x-api-key': import.meta.env.VITE_API_KEY // Api key retrieved from `.env` file in root
 		}
 	};
 
-	// Get prayer requests
+	// Fetch prayer requests
 	const fetchPrayers = useCallback(async () => {
 		setIsLoading(true);
 
@@ -41,7 +41,7 @@ export const PrayersContextProvider = (props) => {
 	}, []);
 
 	/**
-	 * Updates the prayer count on a prayer post
+	 * Update the prayer count on a single prayer post
 	 * @param id - UUID of the prayer you want to update
 	 * @param date - The date the prayer was requested
 	 * @param count - Number of times the prayer has been prayed for
@@ -63,7 +63,6 @@ export const PrayersContextProvider = (props) => {
 			 * when I invoked setState it would not update or render. I was trying to avoid copying the entire
 			 * array in general for performance reasons but there are other ways of mitigating the hit by
 			 * limiting results or only rendering prayers in the user's viewport. For now this will do!
-			 * @todo Emulate what you did in postNewPrayer by using `prev` hook
 			 */
 			const updatedPrayer = prayers.map(
 				prayer => prayer.PrayerId === id ? {...prayer, PrayerCount: newCount } : prayer);
@@ -75,7 +74,7 @@ export const PrayersContextProvider = (props) => {
 		}
 	};
 
-	// Post new prayer request
+	// Post a new prayer request
 	const postNewPrayer = async (data) => {
 		settings.method = 'POST';
 		settings.body = JSON.stringify(data);
@@ -87,7 +86,7 @@ export const PrayersContextProvider = (props) => {
 				new Error(`Prayer request was not posted: ${response.status}`);
 			}
 
-			// Await operator is required otherwise you'll be getting a Promise object which you cant process
+			// Await operator is required otherwise you'll get a Promise object which you can't process
 			const postData = await response.json();
 
 			// Add the new prayer to the store

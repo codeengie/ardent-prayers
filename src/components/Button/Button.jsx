@@ -1,5 +1,6 @@
 import './Button.scss';
 
+// Base button component
 const Button = (props) => {
 
 	// Display text or leave empty so the user can customize on their end

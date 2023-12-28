@@ -1,7 +1,7 @@
 /**
- * The modal-context is crude in that it simply toggles a boolean to show or hide. A future iteration
- * should allow an in between stage when it closes.
- * @todo Extend modal to fade in/out and removing itself as to not affect other dom elements
+ * The modal-context is crude as it only toggles a boolean to show or hide the modal. In the future I will implement
+ * an in between stage when it closes.
+ * @todo Extend modal to fade in/out and remove itself while not affecting other DOM elements
  */
 
 import React, { useState } from 'react';

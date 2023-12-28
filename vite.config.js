@@ -1,9 +1,9 @@
 /**
- * Modified the original build config to output different `index.html` files based on environment. Although,
- * I did manage to accomplish the task with `vite-plugin-html` it appears this plugin is no longer maintained
- * and does not rename the output template html file. Plus, it also includes the template directory into the
- * 'dist' folder. I worked around this by placing the prod version of `index.html` in the root, its Mickey Mouse
- * but it will do for now. @todo Find a suitable replacement for 'vite-plugin-html'
+ * Modified the original build config to output a custom `index.html` file based on environment. Although, I did
+ * manage to accomplish the task with `vite-plugin-html` it appears this plugin is no longer maintained and does not
+ * rename the output template html file. Plus, it also includes the template directory into the `dist` folder. I
+ * around this by placing the prod version of `index.html` in the root, its Mickey Mouse but it will do for now.
+ * @todo Find a suitable replacement for 'vite-plugin-html'
  */
 
 import { defineConfig } from 'vite'
@@ -39,6 +39,7 @@ let options = {
 	]
 };
 
+// When the `npm run build` is executed the `params` object keys are updated and new ones are added
 export default defineConfig(({ command, mode }) => {
 	if (mode === 'production') {
 		params.template = 'index.html';

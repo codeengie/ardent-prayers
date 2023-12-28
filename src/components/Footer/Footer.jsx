@@ -1,5 +1,6 @@
 import './Footer.scss';
 
+// Footer component displays copyright info and sets the year to current
 const Footer = () => {
 	const currentDate = new Date().getFullYear();
 

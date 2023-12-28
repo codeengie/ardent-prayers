@@ -9,6 +9,7 @@
 
 import './SkeletonLoader.scss';
 
+// Skeleton component displays mock card elements while data is being loaded
 const SkeletonLoader = (props) => {
 	const customClass = props.className ? `skeleton ${props.className}` : 'skeleton';
 	const skeletons = [];
