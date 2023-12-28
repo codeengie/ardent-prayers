@@ -3,7 +3,7 @@ import { DynamoDBDocumentClient, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const dynamodb = new DynamoDBClient();
 const dynamodbClient = DynamoDBDocumentClient.from(dynamodb);
-const tableName = 'ArdentPrayers_Dev';
+const tableName = process.env.DB_TABLE_NAME;
 
 export const handler = async (event) => {
 	console.log(`Payload: \n ID - ${event.id}, \n Date - ${event.date} \n Count - ${event.count}`);

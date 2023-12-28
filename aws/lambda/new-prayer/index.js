@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const dynamodb = new DynamoDBClient();
 const dynamodbClient = DynamoDBDocumentClient.from(dynamodb);
-const tableName = 'ArdentPrayers_Dev';
+const tableName = process.env.DB_TABLE_NAME;
 
 export const handler = async (event) => {
 	console.log('Payload: ', event);
