@@ -24,4 +24,9 @@ Ardent Prayers app demonstrates the power of combining React's frontend capabili
 [Cesar Villanueva Jr](https://ardentforms.com)
 
 ## License
-+ You do not have my written, implied or expressed permission to use
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+This license allows you to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the following conditions:
+
+- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+- The software is provided "as is", without warranty of any kind.
