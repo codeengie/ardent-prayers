@@ -22,11 +22,11 @@ let params = {
 	template: 'src/templates/index.dev.html',
 	inject: {
 		data: {
-			title: 'Ardent Prayers - Share Your Prayers and Find Support',
-			desc: 'Join our online prayer wall to connect with a community of believers. Share your prayers, find support, and uplift others in faith. Experience the power of collective prayer.',
-			url: 'https://ardentprayers.com',
-			image: 'https://ardentprayers.com/app.jpg',
-			keywords: 'Prayer wall, online prayer community, prayer support, collective prayer, faith community, spiritual connection, prayer requests, spiritual growth, faith journey'
+			title: 'Add Title',
+			desc: 'Add Description',
+			url: 'https://add-url.com',
+			image: 'https://add-image.com/app.jpg',
+			keywords: 'Add keywords'
 		}
 	}
 };
@@ -45,8 +45,8 @@ export default defineConfig(({ command, mode }) => {
 		params.template = 'index.html';
 		params.inject.data.bots = `<meta name="robots" content="index, follow">`;
 		params.inject.data.gtag = `
-			<script defer src="https://www.googletagmanager.com/gtag/js?id=G-YV2ZE1LRM0"></script>
-			<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YV2ZE1LRM0');</script>
+			<script defer src="https://www.googletagmanager.com/gtag/js?id=ADD-GTAG"></script>
+			<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','ADD-GTAG');</script>
 		`;
 	}
 
